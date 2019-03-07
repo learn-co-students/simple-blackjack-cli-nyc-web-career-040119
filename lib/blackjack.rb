@@ -31,12 +31,20 @@ def initial_round
   total
 end
 
+def compare_hands(your_hand, dealer_hand)
+  if your_hand > dealer_hand
+    puts "Dealer's total was #{dealer_hand}, you win!"
+  else
+    puts "Dealer's total was #{dealer_hand}, you lose..."
+  end
+end
+
 def hit?(total)
   prompt_user
   input = get_user_input
   if input == "s"
-    display_card_total(total)
-    total
+    compare_hands(total, rand(1..11) + rand(1..11))
+    total = 9999
   elsif input == "h"
     total += deal_card
     display_card_total(total)
@@ -59,9 +67,10 @@ end
 def runner
   welcome
   total = initial_round
-  
   while total <= 21
     total = hit?(total)
   end
-  end_game(total)
+  if total > 21 && total != 9999
+    end_game(total)
+  end
 end
