@@ -35,6 +35,7 @@ def hit?(total)
   prompt_user
   input = get_user_input
   if input == "s"
+    display_card_total(total)
     total
   elsif input == "h"
     total += deal_card
@@ -48,7 +49,7 @@ end
 
 def invalid_command
   puts "Please enter a valid command"
-  prompt_user
+  # prompt_user
 end
 
 #####################################################
@@ -59,9 +60,8 @@ def runner
   welcome
   total = initial_round
   
-  while total < 21
+  while total <= 21
     total = hit?(total)
   end
   end_game(total)
 end
-    
